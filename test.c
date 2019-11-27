@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include "matrix_op.c"
+#include "matrix_op.h"
 
 int main(){
   matrix A = matrix_create(3,2);matrix_assign_all(&A, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
@@ -9,15 +9,15 @@ int main(){
   matrix E = mat_add(&A, &A);
   matrix F = mat_minus(&A, &A);
 
-  mat_print(&A);
-  mat_print(&B);
-  mat_print(&C);
-  mat_print(&D);
-  mat_print(&E);
-  mat_print(&F);
+  printf("\nA = \n");mat_print(&A);
+  printf("\nB = \n");mat_print(&B);
+  printf("\nC = A * B = \n");mat_print(&C);
+  printf("\nD = A^T = \n");mat_print(&D);
+  printf("\nE = A + A = \n");mat_print(&E);
+  printf("\nF = A - A  \n");mat_print(&F);
 
   matrix_assign(&A, 1, 1, 123.321);
-  mat_print(&A);
+  printf("\nA = \n");mat_print(&A);
   
   matrix vec1 = matrix_create(1,5);
   matrix vec2 = matrix_create(5,1);

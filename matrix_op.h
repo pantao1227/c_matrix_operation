@@ -1,3 +1,6 @@
+#ifndef __MATRIX_OP_H_
+#define __MATRIX_OP_H_
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdarg.h>
@@ -129,3 +132,5 @@ double vec_dot(matrix *m1, matrix *m2){
 
   return result;
 }
+
+#endif
