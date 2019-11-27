@@ -2,7 +2,7 @@
 
 ## 函数说明
 | 函数名 | 用途 |
--|-|-
+|-|-|-|
 | `matrix matrix_create(int rows, int cols)` | 创建一个`rows * cols`的矩阵 |
 | `void matrix_assign_all(matrix *mat, ...)` | 给已知矩阵整体赋值 |
 | `void matrix_assign(matrix *m, int row, int col, double val)` | 给已知矩阵指定元素赋值 |
