@@ -12,7 +12,7 @@ typedef struct matrix{
   double *DATA;
 }matrix;
 
-//This macro definition is used to access the Matrix element.
+// This macro definition is used to access the Matrix element.
 #define ELEMENT( MATRIX, COL, ROW ) ( MATRIX.DATA[MATRIX.cols*(ROW-1)+(COL-1)] )
 
 void mat_print(matrix *m){
