@@ -9,6 +9,11 @@ int main(){
   matrix E = mat_add(&A, &A);
   matrix F = mat_minus(&A, &A);
 
+  double x = ELEMENT(A,1,1);
+  A.DATA[0] = 456.654;
+  double y = ELEMENT(A,1,1);
+  printf("\n\n%lf-----%lf\n\n",x,y);
+
   printf("\nA = \n");mat_print(&A);
   printf("\nB = \n");mat_print(&B);
   printf("\nC = A * B = \n");mat_print(&C);
