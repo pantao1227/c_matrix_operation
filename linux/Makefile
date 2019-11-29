@@ -1,1 +1,2 @@
-echo test
+default:
+	gcc -o test ../test.c
