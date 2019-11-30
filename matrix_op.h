@@ -6,9 +6,10 @@
 #include<stdarg.h>
 #include<string.h>
 
+// I think the shape of a matrix can not be changed.
 typedef struct matrix{
-  int rows;
-  int cols;
+  const unsigned int rows;
+  const unsigned int cols;
   double *DATA;
 }matrix;
 
