@@ -16,13 +16,13 @@ typedef struct matrix{
 // This macro definition is used to access the Matrix element.
 #define ELEMENT( MATRIX, COL, ROW ) ( MATRIX.DATA[MATRIX.nCols*(ROW-1)+(COL-1)] )
 
-void mat_print(matrix *m){
+void mat_print(const matrix *m){
   for(int i=0;i<m->nRows*m->nCols;i++){
     printf("%lf%s",*(m->DATA+i),(i+1) % m->nCols == 0 ? "\n":"\t");
   }
 }
 
-matrix mat_trans(matrix *m){
+matrix mat_trans(const matrix *m){
   double *pA = (double *)malloc(sizeof(double)*m->nRows*m->nCols);
   matrix mat = {m->nCols,m->nRows,pA};
   for(int i=0; i < mat.nRows; i++){
@@ -42,7 +42,7 @@ matrix matrix_create(int nRows, int nCols){
   return mat;
 }
 
-void matrix_assign_all(matrix *mat, ...){
+void matrix_assign_all(const matrix *mat, ...){
   int cnt = mat->nRows * mat->nCols;
   va_list ap;
   va_start(ap,mat);
@@ -52,7 +52,7 @@ void matrix_assign_all(matrix *mat, ...){
   va_end(ap);
 }
 
-void matrix_assign(matrix *m, int row, int col, double val){
+void matrix_assign(const matrix *m, int row, int col, double val){
   if((row < 1)||(row > m->nRows)||(col < 1)||(col > m->nCols)){
     printf("Index out of bounds!\n");
   }else{
@@ -60,7 +60,7 @@ void matrix_assign(matrix *m, int row, int col, double val){
   }
 }
 
-matrix mat_add(matrix *m1, matrix *m2){
+matrix mat_add(const matrix *m1, const matrix *m2){
   if((m1->nRows == m2->nRows)&&(m1->nCols == m2->nCols)){
     double *pA = (double *)malloc(sizeof(double)*m1->nRows*m1->nCols);
     memset(pA,0,sizeof(double)*m1->nRows*m2->nCols);
@@ -78,7 +78,7 @@ matrix mat_add(matrix *m1, matrix *m2){
   }
 }
 
-matrix mat_minus(matrix *m1, matrix *m2){
+matrix mat_minus(const matrix *m1, const matrix *m2){
   if((m1->nRows == m2->nRows)&&(m1->nCols == m2->nCols)){
     double *pA = (double *)malloc(sizeof(double)*m1->nRows*m1->nCols);
     memset(pA,0,sizeof(double)*m1->nRows*m2->nCols);
@@ -96,7 +96,7 @@ matrix mat_minus(matrix *m1, matrix *m2){
   }
 }
 
-matrix mat_mul(matrix *m1, matrix *m2){
+matrix mat_mul(const matrix *m1, const matrix *m2){
   if(m1->nCols != m2->nRows){
     matrix mat = {m1->nRows, m2->nCols, 0};
     printf("ERROR! Matrix dimensions must agree!\n");
@@ -120,7 +120,7 @@ matrix mat_mul(matrix *m1, matrix *m2){
   }
 }
 
-double vec_dot(matrix *m1, matrix *m2){
+double vec_dot(const matrix *m1, const matrix *m2){
   double result=0;
   if((m1->nRows != 1)&&(m1->nCols != 1)){
     printf("m1 is not a vector!\n");
