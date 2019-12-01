@@ -2,14 +2,18 @@
 
 ## 矩阵的存储
 
-矩阵是二维数组，但是内存是一维的，所以不妨用一维数组存储矩阵，同时需要两个整型变量存储矩阵的尺寸。因此使用结构体：
+矩阵是二维数组，但是内存是一维的，所以不妨用一维数组存储矩阵，同时需要两个整型变量存储矩阵的尺寸。矩阵初始化后，不可更改尺寸。因此使用结构体：
 
-```C
+``` C
 typedef struct matrix{
-  int rows;
-  int cols;
+  const unsigned int nRows;
+  const unsigned int nCols;
   double *DATA;
 }matrix;
+```
+使用如下宏定义访问矩阵元素：
+``` C
+#define ELEMENT( MATRIX, COL, ROW ) ( MATRIX.DATA[MATRIX.nCols*(ROW-1)+(COL-1)] )
 ```
 
 ## 函数说明
