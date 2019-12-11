@@ -51,12 +51,12 @@ void matrix_close(matrix *m){
   }
 }
 
-void matrix_assign_all(const matrix *mat, ...){
-  int cnt = mat->nRows * mat->nCols;
+void matrix_assign_all(const matrix *m, ...){
+  int cnt = m->nRows * m->nCols;
   va_list ap;
-  va_start(ap,mat);
+  va_start(ap,m);
   for(int i=0;i<cnt;i++){
-        mat->DATA[i] = va_arg(ap,double);
+        m->DATA[i] = va_arg(ap,double);
   }
   va_end(ap);
 }
