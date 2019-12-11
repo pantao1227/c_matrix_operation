@@ -20,6 +20,7 @@ typedef struct matrix{
 | 函数名 | 用途 |
 |---|---|
 | `matrix matrix_create(int rows, int cols)` | 创建一个`rows * cols`的矩阵 |
+| `void matrix_close(matrix *m)` | 释放malloc函数申请的内存 |
 | `void matrix_assign_all(matrix *mat, ...)` | 给已知矩阵整体赋值 |
 | `void matrix_assign(matrix *m, int row, int col, double val)` | 给已知矩阵指定元素赋值 |
 | `matrix mat_add(matrix *m1, matrix *m2)` | 矩阵加法 |

@@ -37,5 +37,10 @@ int main(){
   printf("\nVec1 dot Vec1 = %lf \n",vec_dot(&vec1,&vec1));
   printf("\nVec2 dot Vec2 = %lf \n",vec_dot(&vec2,&vec2));
 
+  mat_print(&A);
+  matrix_close(&A);
+  matrix_close(&A);
+  // mat_print(&A);
+
   return 0;
 }

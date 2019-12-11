@@ -42,6 +42,15 @@ matrix matrix_create(int nRows, int nCols){
   return mat;
 }
 
+void matrix_close(matrix *m){
+  if(m->DATA != NULL){
+    free(m->DATA);
+    m->DATA = NULL;
+  }else{
+    printf("Matrix had been close.\n");
+  }
+}
+
 void matrix_assign_all(const matrix *mat, ...){
   int cnt = mat->nRows * mat->nCols;
   va_list ap;
