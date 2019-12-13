@@ -35,9 +35,22 @@ matrix mat_trans(const matrix *m){
 }
 
 matrix matrix_create(int nRows, int nCols){
-  double *pA = (double *)malloc(sizeof(double)*nRows*nCols);
-  memset(pA, 0, sizeof(double)*nRows*nCols);
-  matrix mat = {nRows,nCols,pA};
+  double *pdData = (double *)malloc(sizeof(double)*nRows*nCols);
+  memset(pdData, 0, sizeof(double)*nRows*nCols);
+  matrix mat = {nRows,nCols,pdData};
+
+  return mat;
+}
+
+matrix matrix_copy(matrix *m){
+  int nRows, nCols;
+  nRows = m->nRows;
+  nCols = m->nCols;
+  double *pdData = (double *)malloc(sizeof(double)*nRows*nCols);
+  for(int i=0;i<nRows*nCols;i++){
+    pdData[i] = m->pdData[i];
+  }
+  matrix mat = {nRows,nCols,pdData};
 
   return mat;
 }

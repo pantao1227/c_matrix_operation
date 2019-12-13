@@ -38,16 +38,14 @@ int main(){
   printf("\nVec2 dot Vec2 = %lf \n",vec_dot(&vec2,&vec2));
 
   //copy matrix
-  matrix A_copy = A;
+  matrix A_copy = matrix_copy(&A);
   mat_print(&A_copy);
-  mat_print(&A);
-  
+
   matrix_close(&A);
-  matrix_close(&A);
-  // matrix_close(&A_copy);
-  // matrix_close(&A_copy);
-  //mat_print(&A_copy);
-  // mat_print(&A); //此处应报错。
+  matrix_close(&A_copy);
+
+  matrix_close(&A);matrix_close(&B);matrix_close(&C);matrix_close(&D);matrix_close(&E);matrix_close(&F);
+  matrix_close(&A);matrix_close(&B);matrix_close(&C);matrix_close(&D);matrix_close(&E);matrix_close(&F);
 
   return 0;
 }
