@@ -10,15 +10,15 @@
 typedef struct matrix{
   const unsigned int nRows;
   const unsigned int nCols;
-  double *DATA;
+  double *pdData;
 }matrix;
 
 // This macro definition is used to access the Matrix element.
-#define ELEMENT( MATRIX, COL, ROW ) ( MATRIX.DATA[MATRIX.nCols*(ROW-1)+(COL-1)] )
+#define ELEMENT( MATRIX, COL, ROW ) ( MATRIX.pdData[MATRIX.nCols*(ROW-1)+(COL-1)] )
 
 void mat_print(const matrix *m){
   for(int i=0;i<m->nRows*m->nCols;i++){
-    printf("%lf%s",*(m->DATA+i),(i+1) % m->nCols == 0 ? "\n":"\t");
+    printf("%lf%s",*(m->pdData+i),(i+1) % m->nCols == 0 ? "\n":"\t");
   }
 }
 
@@ -27,7 +27,7 @@ matrix mat_trans(const matrix *m){
   matrix mat = {m->nCols,m->nRows,pA};
   for(int i=0; i < mat.nRows; i++){
     for(int j=0; j < mat.nCols; j++){
-      pA[mat.nCols * i + j] = m->DATA[m->nCols * j + i];
+      pA[mat.nCols * i + j] = m->pdData[m->nCols * j + i];
     }
   }
 
@@ -43,9 +43,9 @@ matrix matrix_create(int nRows, int nCols){
 }
 
 void matrix_close(matrix *m){
-  if(m->DATA != NULL){
-    free(m->DATA);
-    m->DATA = NULL;
+  if(m->pdData != NULL){
+    free(m->pdData);
+    m->pdData = NULL;
   }else{
     printf("Matrix had been close.\n");
   }
@@ -56,7 +56,7 @@ void matrix_assign_all(const matrix *m, ...){
   va_list ap;
   va_start(ap,m);
   for(int i=0;i<cnt;i++){
-        m->DATA[i] = va_arg(ap,double);
+        m->pdData[i] = va_arg(ap,double);
   }
   va_end(ap);
 }
@@ -65,7 +65,7 @@ void matrix_assign(const matrix *m, int row, int col, double val){
   if((row < 1)||(row > m->nRows)||(col < 1)||(col > m->nCols)){
     printf("Index out of bounds!\n");
   }else{
-    m->DATA[m->nCols * (row-1) + (col-1)] = val;
+    m->pdData[m->nCols * (row-1) + (col-1)] = val;
   }
 }
 
@@ -75,7 +75,7 @@ matrix mat_add(const matrix *m1, const matrix *m2){
     memset(pA,0,sizeof(double)*m1->nRows*m2->nCols);
     matrix mat = {m1->nRows, m2->nCols, pA};
     for(int i=0; i < m1->nRows * m1->nCols; i++){
-      pA[i] = m1->DATA[i] + m2->DATA[i];
+      pA[i] = m1->pdData[i] + m2->pdData[i];
     }
 
     return mat;
@@ -93,7 +93,7 @@ matrix mat_minus(const matrix *m1, const matrix *m2){
     memset(pA,0,sizeof(double)*m1->nRows*m2->nCols);
     matrix mat = {m1->nRows, m2->nCols, pA};
     for(int i=0; i < m1->nRows * m1->nCols; i++){
-      pA[i] = m1->DATA[i] - m2->DATA[i];
+      pA[i] = m1->pdData[i] - m2->pdData[i];
     }
 
     return mat;
@@ -119,7 +119,7 @@ matrix mat_mul(const matrix *m1, const matrix *m2){
       for(int j=0; j < m2->nCols; j++){
         double sum = 0;
         for(int ii=0; ii < m1->nCols; ii++){
-          sum += m1->DATA[m1->nCols * i + ii] * m2->DATA[m2->nCols * ii + j];
+          sum += m1->pdData[m1->nCols * i + ii] * m2->pdData[m2->nCols * ii + j];
         }
         pA[m2->nCols * i + j] = sum;
       }
@@ -139,7 +139,7 @@ double vec_dot(const matrix *m1, const matrix *m2){
     printf("Vector dimensions must agree!\n");
   }else{
     for(int i=0; i < m1->nRows + m1->nCols; i++){
-      result += m1->DATA[i] * m2->DATA[i];
+      result += m1->pdData[i] * m2->pdData[i];
     }
   }
 

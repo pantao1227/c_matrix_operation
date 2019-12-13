@@ -3,7 +3,7 @@ test:
 
 .PHONY: clean
 clean:
-	rm -rf ./test
+	rm -rf ./test ./core*
 
 run: test 
 	./test
